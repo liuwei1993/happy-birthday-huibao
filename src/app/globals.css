@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #2a1f24;
+  --ink-soft: #5c4a52;
+  --rose: #d4788c;
+  --rose-deep: #b85a6e;
+  --blush: #f7e4ea;
+  --petal: #fbf0f3;
+  --gold: #c4a574;
+  --gold-soft: #e8d5b5;
+  --sky-top: #fde8ef;
+  --sky-mid: #f8d4de;
+  --sky-bottom: #fff8f5;
+  --background: var(--sky-bottom);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rose: var(--rose);
+  --color-rose-deep: var(--rose-deep);
+  --color-blush: var(--blush);
+  --color-petal: var(--petal);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-script: var(--font-script);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--ink);
+  background: var(--sky-bottom);
+  font-family: var(--font-body), "Noto Serif SC", serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--rose) 35%, white);
+  color: var(--ink);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-18px) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.85);
+  animation: drift var(--dur, 5s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.fade-up {
+  animation: fade-up 1s ease both;
+}
+
+.fade-up-delay-1 {
+  animation-delay: 0.15s;
+}
+
+.fade-up-delay-2 {
+  animation-delay: 0.35s;
+}
+
+.fade-up-delay-3 {
+  animation-delay: 0.55s;
+}
+
+.fade-up-delay-4 {
+  animation-delay: 0.75s;
+}
+
+.letter-body p {
+  margin: 0 0 1.15em;
+  line-height: 1.9;
+}
+
+.letter-body p:last-child {
+  margin-bottom: 0;
+}
+
+.hero-glow {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 18%, rgba(255, 255, 255, 0.55), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 70% 70%, rgba(212, 120, 140, 0.22), transparent 65%),
+    radial-gradient(ellipse 50% 35% at 20% 80%, rgba(196, 165, 116, 0.18), transparent 60%),
+    linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 42%, var(--sky-bottom) 100%);
+}
+
+.section-band {
+  background:
+    linear-gradient(180deg, transparent, rgba(247, 228, 234, 0.55) 20%, rgba(247, 228, 234, 0.75) 80%, transparent);
+}
+
+.gold-line {
+  height: 1px;
+  width: min(12rem, 40vw);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .star,
+  .fade-up,
+  .gold-line {
+    animation: none !important;
+  }
+
+  .fade-up {
+    opacity: 1;
+    transform: none;
+  }
+}
